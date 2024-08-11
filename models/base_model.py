@@ -7,7 +7,7 @@ The attributes and methods are common to all other classes
 
 from uuid import uuid4
 from datetime import datetime
-
+#from models import storage
 
 class (BaseModel):
     """Public instance attributes:
@@ -47,3 +47,19 @@ class (BaseModel):
                 v = self.__dict__[k].isoformat()
                 my_dict[k] = v
         return my_dict
+
+    def __init__(self, *args, **kwargs):
+        """ Constructor nfor the base nmodel class
+        """
+
+        if not kwargs:
+            self.id = str(uuid4())
+            self.created_at = self.updated_at = datetime.now()
+            #storage.new(self)
+        else:
+            for k, v in kwargs.items():
+                if k != '__class__':
+                    if k in ('created_at','updated_at'):
+                        setattr(self, k, datetime.fromisoformat(value))
+                    else:
+                        setattr(self, k, v)
