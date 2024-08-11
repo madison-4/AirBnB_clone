@@ -2,7 +2,7 @@
 
 """ Module to serialize the dictionary representation of a file to json format
 The serialization flow is as follows:
-<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> JSON dump -> <class 'str'>
+<class 'BaseModel'> -> to_dict() -> <class 'dict'> -> JSON dump -><class 'str'>
  -> FILE -> <class 'str'> -> JSON load -> <class 'dict'> -> <class 'BaseModel'>
 """
 import json

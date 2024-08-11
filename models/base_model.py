@@ -1,24 +1,26 @@
 #!/usr/bin/python3
 """ A module to define all common attri9butes and methods
     This is the root class that all other classess in this project inherit from
-The attributes and methods are common to all other classes
+  The attributes and methods are common to all others
 """
 
 
 from uuid import uuid4
 from datetime import datetime
-#from models import storage
+from models import storage
 
-class (BaseModel):
+
+class BaseModel:
     """Public instance attributes:
         id: string - assign with an uuid when an instance is created:
           you can use uuid.uuid4() to generate unique id a string
            the goal is to have unique id for each BaseModel
         created_at: datetime - assign with the current datetime when an
         instance is created
-        updated_at: datetime - assign with the current datetime when an instance
+      updated_at: datetime - assign with the current datetime when an instance
             is created and it will be updated every time you change your object
     """
+
     def __str__(self):
         """ This method aims to print
         [<class name>] (<self.id>) <self.__dict__>
@@ -55,11 +57,11 @@ class (BaseModel):
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = self.updated_at = datetime.now()
-            #storage.new(self)
+            storage.new(self)
         else:
             for k, v in kwargs.items():
                 if k != '__class__':
-                    if k in ('created_at','updated_at'):
+                    if k in ('created_at', 'updated_at'):
                         setattr(self, k, datetime.fromisoformat(value))
                     else:
                         setattr(self, k, v)
