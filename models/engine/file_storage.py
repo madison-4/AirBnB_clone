@@ -1,10 +1,12 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 
 """ Module to serialize the dictionary representation of a file to json format
 The serialization flow is as follows:
 <class 'BaseModel'> -> to_dict() -> <class 'dict'> -> JSON dump -><class 'str'>
  -> FILE -> <class 'str'> -> JSON load -> <class 'dict'> -> <class 'BaseModel'>
 """
+
+
 import json
 from models.base_model import BaseModel
 from models.user import User
@@ -33,7 +35,7 @@ class FileStorage:
         """sets in __objects the obj with key <obj class name>.id
         """
 
-        self.objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
         return (self.__objects)
 
     def save(self):

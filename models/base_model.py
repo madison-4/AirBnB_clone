@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" A module to define all common attri9butes and methods
+"""
+A module to define all common attri9butes and methods
     This is the root class that all other classess in this project inherit from
   The attributes and methods are common to all others
 """
@@ -7,7 +8,6 @@
 
 from uuid import uuid4
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
@@ -27,7 +27,7 @@ class BaseModel:
         each tiem it is called
         """
 
-        name = f"[{type(self).__name__}] ({self.id}) {self.id}"
+        name = f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
         return (name)
 
     def save(self):
@@ -36,6 +36,8 @@ class BaseModel:
         """
 
         self.updated_at = datetime.now()
+        from models import storage
+        storage.save()
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values of __dict__ of the
@@ -57,11 +59,12 @@ class BaseModel:
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = self.updated_at = datetime.now()
+            from models import storage
             storage.new(self)
         else:
             for k, v in kwargs.items():
                 if k != '__class__':
                     if k in ('created_at', 'updated_at'):
-                        setattr(self, k, datetime.fromisoformat(value))
+                        setattr(self, k, datetime.fromisoformat(v))
                     else:
                         setattr(self, k, v)
