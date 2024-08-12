@@ -38,3 +38,5 @@ class TestPlace(unittest.TestCase):
 
     def test_place_obj_is_a_subclass_of_basemodel(self):
         self.assertTrue(issubclass(type(self.place), BaseModel))
+if __name__ == '__main__':
+    unittest.main()

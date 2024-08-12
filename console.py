@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-""" A module to implement the entry point of the command interporeter
-"""
-
-
+"""contains the entry point of the command interpreter"""
 import cmd
 import re
 from shlex import split
 
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.city import City
@@ -14,10 +12,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.state import State
 from models.review import Review
-import models
 
-
-# list of classes from where users will be created
+# A global constant since both functions within and outside uses it.
 CLASSES = [
     "BaseModel",
     "User",
@@ -30,10 +26,6 @@ CLASSES = [
 
 
 def parse(arg):
-    """function to parse the arguments to ensure they can be compared
-       to the gicen classes
-    """
-
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_braces is None:
@@ -71,17 +63,14 @@ def check_args(args):
 
 
 class HBNBCommand(cmd.Cmd):
-    """ A class to define the console part of the airbnb clone
+    """The class that implements the console
+    for the AirBnB clone web application
     """
-
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
     storage = models.storage
 
     def emptyline(self):
-        """ What to execute when an empty line and Enter
-            id pressed
-        """
-
+        """Command to executed when empty line + <ENTER> key"""
         pass
 
     def default(self, arg):
@@ -108,18 +97,13 @@ class HBNBCommand(cmd.Cmd):
         print("*** Unknown syntax: {}".format(arg))
         return False
 
-    def default(self, arg):
-        """ Deafukt beahviour for invalid input
-        """
-
-        print("*** Unknown syntax: {arg}")
-        return False
-
     def do_EOF(self, argv):
-        """EOF signal to exit program
-        """
+        """EOF signal to exit the program"""
+        print("")
+        return True
 
-        print()
+    def do_quit(self, argv):
+        """When executed, exits the console."""
         return True
 
     def do_create(self, argv):
@@ -206,8 +190,7 @@ class HBNBCommand(cmd.Cmd):
             if arg1[0] == type(obj).__name__:
                 count += 1
         print(count)
-        return (count)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()

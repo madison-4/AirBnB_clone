@@ -24,3 +24,5 @@ class TestAmenity(unittest.TestCase):
     def test_class_attr(self):
         self.assertIs(type(self.amenity.name), str)
         self.assertFalse(bool(getattr(self.amenity, "name")))
+if __name__ == '__main__':
+    unittest.main()
