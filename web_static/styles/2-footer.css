@@ -1,0 +1,10 @@
+.foot {
+    background-color: #00ff00;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    position: fixed;
+    padding-top: 15px;
+    bottom: 0;    
+}
