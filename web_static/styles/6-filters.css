@@ -51,7 +51,7 @@ section div h4 {
     padding-top: 15%;
     border: #DDDDDD 1px solid;
     border-radius: 4px;
-    background-color: wheat;
+    background-color: #fafafa;
 }
 .locations:hover .popover {
     display: block;
