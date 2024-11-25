@@ -46,7 +46,13 @@ section div h4 {
 /*.popover {
     display: none;
 }*/
-div:hover .popover{
+.locations:hover .popover{
+    padding-top: 15%;
+    border: #DDDDDD 1px solid;
+    border-radius: 4px;
+    background-color: wheat;
+}
+.amenities:hover .popover {
     padding-top: 15%;
     border: #DDDDDD 1px solid;
     border-radius: 4px;
