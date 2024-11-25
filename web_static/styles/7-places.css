@@ -65,25 +65,17 @@ ul {
 .locations {
     border-right: none;
 }
-.places h1 {
-    display: block;
-    float: left;
+section .places h1 {
+    text-align: left;
     font-size: 30px;
 }
-.places article {
+section .places article {
     width: 390px;
-    margin: 20px;
     padding: 20px;
-    border: #ff5a5f 1px outset;
+    margin: 20px;
+    border-radius: 4px;
+    border: solid 1px #ff5a5f;
 }
-.places h1 {
-    display: block;
-    float: left;
+section .places article h2 {
     font-size: 30px;
-}
-.places article {
-    width: 390px;
-    margin: 20px;
-    padding: 20px;
-    border: #ff5a5f 1px outset;
 }
