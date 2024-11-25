@@ -43,3 +43,12 @@ section div h4 {
     font-size: 14px;
     margin-top: 1px;
 }
+/*.popover {
+    display: none;
+}*/
+div:hover .popover{
+    padding-top: 15%;
+    border: #DDDDDD 1px solid;
+    border-radius: 4px;
+    background-color: wheat;
+}
