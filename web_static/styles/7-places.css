@@ -66,3 +66,25 @@ ul {
 .locations {
     border-right: none;
 }
+.places h1 {
+    display: block;
+    float: left;
+    font-size: 30px;
+}
+.places article {
+    width: 390px;
+    margin: 20px;
+    padding: 20px;
+    border: #ff5a5f 1px outset;
+}
+.places h1 {
+    display: block;
+    float: left;
+    font-size: 30px;
+}
+.places article {
+    width: 390px;
+    margin: 20px;
+    padding: 20px;
+    border: #ff5a5f 1px outset;
+}
