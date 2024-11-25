@@ -43,18 +43,23 @@ section div h4 {
     font-size: 14px;
     margin-top: 1px;
 }
-/*.popover {
+.popover {
     display: none;
-}*/
-.locations:hover .popover{
+}
+.amenities:hover .popover {
+    display: block;
     padding-top: 15%;
     border: #DDDDDD 1px solid;
     border-radius: 4px;
     background-color: wheat;
 }
-.amenities:hover .popover {
+.locations:hover .popover {
+    display: block;
     padding-top: 15%;
     border: #DDDDDD 1px solid;
     border-radius: 4px;
     background-color: wheat;
+}
+ul {
+    list-style: none;
 }
