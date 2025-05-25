@@ -24,8 +24,8 @@ class BaseModel:
         """Define how the instance should be printed
         """
 
-        string = f"[{type(self).__name__}] ({self.id}) self.__dict__"
-        return string
+        my_string = f"[{type(self).__name__}] ({self.id}) self.__dict__"
+        return my_string
 
     def save(self):
         """ A function to save the instance and the time it is saved
@@ -39,4 +39,10 @@ class BaseModel:
         key/values of the __dict__ instance
         """
 
-        
+        my_dict = self.__dict__
+        my_dict['__class__'] = self.__class__.__name__
+        my_dict['created_at'] = my_dict['created_at'].isoformat()
+        my_dict['updated_at'] = my_dict['updated_at'].isoformat()
+
+        return my_dict
+    
