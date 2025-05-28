@@ -6,6 +6,7 @@
 import uuid
 import datetime
 
+
 class BaseModel:
     """ This class defines the common attributes and methods
     All classes will inherit these methods
