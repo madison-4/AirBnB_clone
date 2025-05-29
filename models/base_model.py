@@ -12,7 +12,7 @@ class BaseModel:
     All classes will inherit these methods
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ This method inmitilizes all objects
         It just assigns the id and the time using uuid
         """
@@ -20,6 +20,10 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
+        for key, value in kwargs.items():
+            if key == '__class__':
+                continue
+            self.key = value
 
     def __str__(self):
         """Define how the instance should be printed

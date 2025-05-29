@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" This module is to test bthe basemodel module
+""" This module is to test the basemodel module
 """
 
 
@@ -54,7 +54,6 @@ class test_base(unittest.TestCase):
         else:
             raise ValueError("str dunder method not available")
         if retstr != teststr:
-            print(f"retstr is {retstr} while the \n expected teststr is {teststr}")
             raise ValueError("The given strings don't match")
 
     def test_save(self):
@@ -81,3 +80,24 @@ class test_base(unittest.TestCase):
             raise TypeError("type of created_at is not str")
         if (type(checkdict["updated_at"]) is not str):
             raise TypeError("Type of updated_at is not str")
+
+    def test_new__init__(self):
+        """ This tests the value of the updated init function
+        """
+
+        usedict = self.user1.to_dict()
+        user3 = base_model.BaseModel(**usedict)
+        print("----------------------------------")
+        print(user3)
+        print()
+        print()
+        if user3.__class__:
+            print(f"{user3.__class__}")
+            raise ValueError("__class__ attribute exists")
+        usedict.pop("__class__")
+        for key in usedict.keys():
+            if not user3.key:
+                raise ValueError(f"{key} attribute not there")
+        for key, value in usedict.items():
+            if (user3.key != value):
+                raise valueError(f"{key} does not match {value}")
