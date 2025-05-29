@@ -88,16 +88,20 @@ class test_base(unittest.TestCase):
         usedict = self.user1.to_dict()
         user3 = base_model.BaseModel(**usedict)
         print("----------------------------------")
-        print(user3)
+        print(user3.to_dict())
         print()
         print()
-        if user3.__class__:
-            print(f"{user3.__class__}")
-            raise ValueError("__class__ attribute exists")
         usedict.pop("__class__")
         for key in usedict.keys():
             if not user3.key:
                 raise ValueError(f"{key} attribute not there")
         for key, value in usedict.items():
             if (user3.key != value):
-                raise valueError(f"{key} does not match {value}")
+                print()
+                print()
+                print(f"{user3.key} is the attribute")
+                print()
+                print(f"{value} is the value of the dict")
+                raise ValueError(f"{key} does not match {value}")
+        if __class__ in user3.__dict__:
+            raise ValueError("__class__ attribute exists")
