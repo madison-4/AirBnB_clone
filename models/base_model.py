@@ -25,7 +25,7 @@ class BaseModel:
         """Define how the instance should be printed
         """
 
-        my_string = f"[{type(self).__name__}] ({self.id}) self.__dict__"
+        my_string = f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
         return my_string
 
     def save(self):

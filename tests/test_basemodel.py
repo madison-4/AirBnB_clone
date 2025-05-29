@@ -42,3 +42,42 @@ class test_base(unittest.TestCase):
         self.assertIsInstance(self.user1.id, str)
         self.assertIsInstance(self.user1.created_at, datetime.datetime)
         self.assertIsInstance(self.user1.updated_at, datetime.datetime)
+
+    def test_str(self):
+        """ Testing the methods of the class
+        """
+
+        retstr = str(self.user1)
+        teststr = f"[BaseModel] ({self.user1.id}) {self.user1.__dict__}"
+        if (retstr):
+            pass
+        else:
+            raise ValueError("str dunder method not available")
+        if retstr != teststr:
+            print(f"retstr is {retstr} while the \n expected teststr is {teststr}")
+            raise ValueError("The given strings don't match")
+
+    def test_save(self):
+        """This function tests the save method
+        """
+
+        self.user1.save()
+        if self.user1.updated_at == self.user1.created_at:
+            raise ValueError("updated_at was not updated when save was called")
+
+    def test_to_dict(self):
+        """Test the to_dict method
+        The method takes no arguments
+        """
+
+        checkdict = self.user1.to_dict()
+        self.assertIsInstance(checkdict, dict)
+        """print(checkdict)"""
+        if '__class__' not in checkdict:
+            raise ValueError("__class__ key not present")
+        if (checkdict["__class__"] != "BaseModel"):
+            raise ValueError("key of __class__ not class name")
+        if (type(checkdict["created_at"]) is not str):
+            raise TypeError("type of created_at is not str")
+        if (type(checkdict["updated_at"]) is not str):
+            raise TypeError("Type of updated_at is not str")
