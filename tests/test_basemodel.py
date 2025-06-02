@@ -81,27 +81,28 @@ class test_base(unittest.TestCase):
         if (type(checkdict["updated_at"]) is not str):
             raise TypeError("Type of updated_at is not str")
 
-    def test_new__init__(self):
-        """ This tests the value of the updated init function
+    def test_new_init(self):
+        """ This function tests whethere the updated init works
+        well. It assigns new attributes as the key to the dict
+        it also gives their values as the attribute values.
         """
 
-        usedict = self.user1.to_dict()
-        user3 = base_model.BaseModel(**usedict)
-        print("----------------------------------")
-        print(user3.__dict__)
-        print()
-        print()
-        print(usedict)
-        if __class__ in user3.__dict__:
-            raise ValueError("__class__ attribute exists")
-        for key in usedict.keys():
-            if key == '__class__':
+        checkdict = self.user1.to_dict()
+        user3 = base_model.BaseModel(**checkdict)
+        for key in checkdict.keys():
+            if key == "__class__":
                 continue
-            if not (hasattr(self, key)):
+            if not hasattr(user3, key):
+                print(key)
+                print(user3.__dict__)
+                print("\n\n\n")
                 raise ValueError(f"Attribute {key} not found")
-        for key, value in usedict.items():
-            check = getattr(self, key, None)
-            if (check != value):
-                print(f"The key value pair is {key} : {value}")
-                print(f"yet the attribute is {check}")
-                raise ValueError(f"{key} does not match {value}")
+        for key, value in checkdict.items():
+            if key == "__class__":
+                continue
+            val = getattr(user3, key, None)
+            if user3.__dict__[key] != val:
+                print(f"The key is {key} ")
+                print(f"The value is {value} ")
+                print(f"The attribute is {val} ")
+                raise ValueError(f"The value in the dict do not match the attr")
