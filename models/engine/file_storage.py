@@ -27,8 +27,10 @@ class FileStorage():
             """ It sets in the __objects an obj with the key classname.id
             """
 
-             key = f"{obj.__class__.__name__}"
-             self.__objects[key] = obj
+            if (type(obj)) not isinstance(BaseModel):
+                return
+            key = f"{obj.__class__.__name__}.{obj.id}"
+            self.__objects[key] = obj
 
         def save(self):
             """ It serializes the __objects dict to the json file
@@ -41,4 +43,10 @@ class FileStorage():
         def reload(self):
             """ Deserializes the json file
             """
-            
+
+            try:
+                temp{}
+                with open(self.__file_path, 'r') as fildes:
+                    self.__objects = json.load(fildes)
+            except:
+                pass
