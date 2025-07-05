@@ -10,7 +10,7 @@ class FileStorage():
     instances to a json file and deserilizes json files to instances
     """
 
-    __file_path = savefile.json
+    __file_path = file.json
     __objects = {}
     def __init__(self):
         """ Instantiates the class with its variables
@@ -47,6 +47,7 @@ class FileStorage():
             try:
                 temp{}
                 with open(self.__file_path, 'r') as fildes:
-                    self.__objects = json.load(fildes)
+                    temp = json.load(fildes)
+                    self.__objects.append(temp)
             except:
                 pass
