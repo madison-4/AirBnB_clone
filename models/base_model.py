@@ -5,7 +5,7 @@
 
 import uuid
 from datetime import datetime
-import storage
+from . import storage
 
 class BaseModel:
     """ This class defines the common attributes and methods

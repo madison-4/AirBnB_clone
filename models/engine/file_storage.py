@@ -10,44 +10,43 @@ class FileStorage():
     instances to a json file and deserilizes json files to instances
     """
 
-    __file_path = file.json
+    __file_path = 'file.json'
     __objects = {}
     def __init__(self):
         """ Instantiates the class with its variables
         and attribiutes
         """
 
-        def all(self):
-            """ Returns the objects dictionary
-            """
+    def all(self):
+        """ Returns the objects dictionary
+        """
 
-            return __objects
+        return self.__objects
 
-        def new(self, obj):
-            """ It sets in the __objects an obj with the key classname.id
-            """
+    def new(self, obj):
+       """ It sets in the __objects an obj with the key classname.id
+       """
 
-            if (type(obj)) not isinstance(BaseModel):
-                return
-            key = f"{obj.__class__.__name__}.{obj.id}"
-            self.__objects[key] = obj
+       if not (isinstance(obj, BaseModel)):
+           return
+       key = f"{obj.__class__.__name__}.{obj.id}"
+       self.__objects[key] = obj
 
-        def save(self):
-            """ It serializes the __objects dict to the json file
-            """
+    def save(self):
+        """ It serializes the __objects dict to the json file
+        """
 
+        with open(self.__file_path, mode='w+') as fildes:
+            json.dump(self.__objects, self.__file_path)
 
-            with open(self.__file_path, mode='w+') as fildes:
-                json.dump(self.__objects, self.__file_path)
+    def reload(self):
+        """ Deserializes the json file
+        """
 
-        def reload(self):
-            """ Deserializes the json file
-            """
-
-            try:
-                temp{}
-                with open(self.__file_path, 'r') as fildes:
-                    temp = json.load(fildes)
-                    self.__objects.append(temp)
-            except:
+        try:
+            temp = {}
+            with open(self.__file_path, 'r') as fildes:
+                temp = json.load(fildes)
+                self.__objects.append(temp)
+        except:
                 pass
