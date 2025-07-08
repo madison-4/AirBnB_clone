@@ -25,28 +25,29 @@ class FileStorage():
 
     def new(self, obj):
        """ It sets in the __objects an obj with the key classname.id
+           can't ccheck if obj is an instance of BaseModel since
+           where basemodel is defined, it imports this module
        """
 
-       if not (isinstance(obj, BaseModel)):
-           return
+#       if not (isinstance(obj, BaseModel)):
+#           return
        key = f"{obj.__class__.__name__}.{obj.id}"
-       self.__objects[key] = obj
+       self.__objects[key] = obj.to_dict()
 
     def save(self):
         """ It serializes the __objects dict to the json file
         """
 
         with open(self.__file_path, mode='w+') as fildes:
-            json.dump(self.__objects, self.__file_path)
+            json.dump(self.__objects, fildes)
 
     def reload(self):
         """ Deserializes the json file
         """
 
         try:
-            temp = {}
             with open(self.__file_path, 'r') as fildes:
                 temp = json.load(fildes)
-                self.__objects.append(temp)
+                self.__objects.update(temp)
         except:
                 pass
