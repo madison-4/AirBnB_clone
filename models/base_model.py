@@ -52,7 +52,9 @@ class BaseModel:
 
         my_dict = self.__dict__
         my_dict['__class__'] = self.__class__.__name__
-        my_dict['created_at'] = my_dict['created_at'].isoformat()
-        my_dict['updated_at'] = my_dict['updated_at'].isoformat()
+        if (type(my_dict['created_at']) is not str):
+            my_dict['created_at'] = my_dict['created_at'].isoformat()
+        if (type(my_dict['updated_at']) is not str):
+            my_dict['updated_at'] = my_dict['updated_at'].isoformat()
 
         return my_dict
