@@ -7,6 +7,7 @@ from models.engine import file_storage
 from models import base_model
 import unittest
 import os
+import json
 
 class Testsave(unittest.TestCase):
     """ This class tests the persistence functions
@@ -50,6 +51,21 @@ class Testsave(unittest.TestCase):
         """
 
         self.obj1.save()
+        path = os.getcwd()
+        entries = os.listdir(os.getcwd())
+        for fp in entries:
+            checker = path + "/" + fp
+            if (os.path.isfile(checker)):
+                if checker.endswith('.json'):
+                    break
+        else:
+            raise FileNotFoundError("No .json file created")
+        with open(checker, "r") as fildes:
+            try:
+                with open(checker, "r") as fildes:
+                    json.load(fildes)
+            except json.JSONDecodeError as e:
+                raise ValueError(f"Contents of {checker} aren't json valid")
 
 if __name__ == "__main__":
     unittest.main()
