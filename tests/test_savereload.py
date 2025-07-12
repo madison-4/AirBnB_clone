@@ -67,5 +67,24 @@ class Testsave(unittest.TestCase):
             except json.JSONDecodeError as e:
                 raise ValueError(f"Contents of {checker} aren't json valid")
 
+    def test_reload(self):
+        """ This function tests the reload function
+        It checks the function does not fail if the file doesn't exist
+        It then checks the contents of the private variable objects match those
+        in the file.json
+
+        First it deletes the files named .json
+        """
+
+        paths = os.getcwd()
+        files = os.listdir(paths)
+        for obj in files:
+            to_del = paths + "/" + obj
+            if os.path.isfile(to_del):
+                if to_del.endswith(".json"):
+                    os.remove(to_del)
+        self.obj1.reload()
+        val = self.obj1.all()
+
 if __name__ == "__main__":
     unittest.main()
