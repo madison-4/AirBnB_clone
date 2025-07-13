@@ -32,22 +32,25 @@ class FileStorage():
 #       if not (isinstance(obj, BaseModel)):
 #           return
        key = f"{obj.__class__.__name__}.{obj.id}"
-       self.__objects[key] = obj.to_dict()
+       self.__objects[key] = obj
 
     def save(self):
         """ It serializes the __objects dict to the json file
         """
 
         with open(self.__file_path, mode='w+') as fildes:
-            json.dump(self.__objects, fildes)
+            my_dict = {}
+            for key, value in self.__objects.items():
+                my_dict[key] = value.to_dict()
+            json.dump(my_dict, fildes)
 
     def reload(self):
         """ Deserializes the json file
         """
 
         try:
-            with open(self.__file_path, 'r') as fildes:
-                temp = json.load(fildes)
-                self.__objects.update(temp)
+            with open(self.__file_path, 'r', encoding="utf-8") as fildes:
+                new_dict = json.load(fildes)
+                self.__objects.update(new_dict)
         except:
                 pass

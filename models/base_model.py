@@ -42,7 +42,7 @@ class BaseModel:
         It simply updates the instance attribute updated_at
         """
 
-        self.updated_at = datetime.now().isoformat()
+        self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
