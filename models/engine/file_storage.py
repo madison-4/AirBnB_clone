@@ -29,8 +29,6 @@ class FileStorage():
            where basemodel is defined, it imports this module
        """
 
-#       if not (isinstance(obj, BaseModel)):
-#           return
        key = f"{obj.__class__.__name__}.{obj.id}"
        self.__objects[key] = obj
 
@@ -51,6 +49,7 @@ class FileStorage():
         try:
             with open(self.__file_path, 'r', encoding="utf-8") as fildes:
                 new_dict = json.load(fildes)
-                self.__objects.update(new_dict)
+                for obj in new_dict.values():
+                    self.new(eval(obj["__class__"])(**obj))
         except:
-                pass
+            return
