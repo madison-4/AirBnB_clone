@@ -1,55 +1,51 @@
 #!/usr/bin/python3
-""" It serializes isntances to json files
-it also deserializes them
+"""
+Contains the FileStorage class model
 """
 
 import json
 
-class FileStorage():
-    """This class serializes anmd deserialies
-    instances to a json file and deserilizes json files to instances
+
+class FileStorage:
+    """
+    serializes instances to a JSON file and
+    deserializes JSON file to instances
     """
 
-    __file_path = 'file.json'
+    __file_path = "file.json"
     __objects = {}
-    def __init__(self):
-        """ Instantiates the class with its variables
-        and attribiutes
-        """
 
     def all(self):
-        """ Returns the objects dictionary
         """
-
+        Returns the dictionary __objects
+        """
         return self.__objects
 
     def new(self, obj):
-       """ It sets in the __objects an obj with the key classname.id
-           can't ccheck if obj is an instance of BaseModel since
-           where basemodel is defined, it imports this module
-       """
-
-       key = f"{obj.__class__.__name__}.{obj.id}"
-       self.__objects[key] = obj
+        """
+        sets in __objects the `obj` with key <obj class name>.id
+        """
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
-        """ It serializes the __objects dict to the json file
         """
-
-        with open(self.__file_path, mode='w+') as fildes:
-            my_dict = {}
-            for key, value in self.__objects.items():
-                my_dict[key] = value.to_dict()
-            json.dump(my_dict, fildes)
+        Serialize __objects to the JSON file
+        """
+        with open(self.__file_path, mode="w") as f:
+            dict_storage = {}
+            for k, v in self.__objects.items():
+                dict_storage[k] = v.to_dict()
+            json.dump(dict_storage, f)
 
     def reload(self):
-        """ Deserializes the json file
         """
-
+        Deserializes the JSON file to __objects
+        -> Only IF it exists!
+        """
         try:
-            with open(self.__file_path, 'r', encoding="utf-8") as fildes:
-                new_dict = json.load(fildes)
-                for obj in new_dict.values():
-                    self.new(eval(obj["__class__"])(**obj))
-        except:
+            with open(self.__file_path, encoding="utf-8") as f:
+                print(self.__objects)
+                self.__objects = json.load(f)
+                print(self.__objects)
+        except FileNotFoundError:
             return
