@@ -12,6 +12,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = '(hbnb) '
+
     def do_EOF(self, line):
         """ Exits the interorter gracefully
         """
@@ -34,6 +35,7 @@ class HBNBCommand(cmd.Cmd):
         """
 
         pass
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

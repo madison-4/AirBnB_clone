@@ -105,4 +105,4 @@ class test_base(unittest.TestCase):
                 print(f"The key is {key} ")
                 print(f"The value is {value} ")
                 print(f"The attribute is {val} ")
-                raise ValueError(f"The value in the dict do not match the attr")
+                raise ValueError(f"Value in the dict dont match the attr")

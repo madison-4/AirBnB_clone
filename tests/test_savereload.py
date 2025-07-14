@@ -9,6 +9,7 @@ import unittest
 import os
 import json
 
+
 class Testsave(unittest.TestCase):
     """ This class tests the persistence functions
     """
@@ -85,6 +86,7 @@ class Testsave(unittest.TestCase):
                     os.remove(to_del)
         self.obj1.reload()
         val = self.obj1.all()
+
 
 if __name__ == "__main__":
     unittest.main()
