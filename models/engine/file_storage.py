@@ -6,6 +6,7 @@ Contains the FileStorage class model
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """
     serializes instances to a JSON file and
