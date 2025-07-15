@@ -24,6 +24,24 @@ class HBNBCommand(cmd.Cmd):
 
         return True
 
+    @staticmethod
+    def classcheck(line):
+        """ A function to check that the given class exists
+        
+        Args:
+             line: The class name to check and rint
+        Return: 
+             True if the class exists and false otherwise
+        """
+
+        comms = line.split()
+        name = comms[0]
+        if name not in (HBNBCommand.classes):
+            print(HBNBCommand.nexist)
+            return False
+        else:
+            return True
+        
     def do_quit(self, line):
         """Quits the interprter
         if line exists it willuse it as the
@@ -61,6 +79,15 @@ class HBNBCommand(cmd.Cmd):
             else:
                 obj = eval(cla)()
                 obj.save()
+
+    def do_show(self, line):
+        """ A function to show the string rep of an instance
+        """
+
+        if not line:
+            print(self.miss)
+        if (self.classcheck(line)):
+            pass
         
 
 if __name__ == "__main__":
