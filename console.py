@@ -26,9 +26,20 @@ class HBNBCommand(cmd.Cmd):
         """
 
         if line:
-            if (type(line) is int):
-                sys.exit(line)
+            try:
+                line = int(line)
+                if (type(line) is int):
+                    sys.exit(line)
+            except:
+                return True
         return True
+
+    def help_quit(self):
+        """ lists how to use the quit command
+        """
+
+        print(f"quit [status]")
+        print("quits the interpreter with [status] is status is a valid int")
 
     def emptyline(self):
         """ What to do when an empoty line is encountred
@@ -36,6 +47,11 @@ class HBNBCommand(cmd.Cmd):
 
         pass
 
+    def do_create(self, line):
+        """ Create an object of a given class
+        """
+
+        pass
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

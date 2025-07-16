@@ -147,8 +147,8 @@ class TestBaseModel(unittest.TestCase):
         """
         Checks that id, created_at and updated_at are created from kwargs
         """
-        my_dict = {"id": uuid4(), "created_at": datetime.utcnow().isoformat(),
-                   "updated_at": datetime.utcnow().isoformat()}
+        my_dict = {"id": uuid4(), "created_at": datetime.now().isoformat(),
+                   "updated_at": datetime.now().isoformat()}
         b = BaseModel(**my_dict)
         self.assertEqual(b.id, my_dict["id"])
         self.assertEqual(b.created_at,
@@ -174,8 +174,8 @@ class TestBaseModel(unittest.TestCase):
         Checks BaseModel does not break when kwargs contains more than
         the default attributes
         """
-        my_dict = {"id": uuid4(), "created_at": datetime.utcnow().isoformat(),
-                   "updated_at": datetime.utcnow().isoformat(),
+        my_dict = {"id": uuid4(), "created_at": datetime.now().isoformat(),
+                   "updated_at": datetime.now().isoformat(),
                    "name": "Firdaus"}
         b = BaseModel(**my_dict)
         self.assertTrue(hasattr(b, "name"))
@@ -185,8 +185,8 @@ class TestBaseModel(unittest.TestCase):
         Test that storage.new() is not called when a BaseModel obj is
         created from a dict object
         """
-        my_dict = {"id": uuid4(), "created_at": datetime.utcnow().isoformat(),
-                   "updated_at": datetime.utcnow().isoformat(),
+        my_dict = {"id": uuid4(), "created_at": datetime.now().isoformat(),
+                   "updated_at": datetime.now().isoformat(),
                    "name": "Firdaus"}
         b = BaseModel(**my_dict)
         self.assertTrue(b not in models.storage.all().values(),
