@@ -2,6 +2,7 @@
 """ A module that makes a simple command line interpreter
 """
 
+import models
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -17,6 +18,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     nexist= "** class doesn't exist **"
     miss = "** class name missing **"
+    storage = models.storage
 
     def do_EOF(self, line):
         """ Exits the interorter gracefully
@@ -95,8 +97,19 @@ class HBNBCommand(cmd.Cmd):
 
         if not line:
             print(self.miss)
-        if (self.classcheck(line)):
+        if not (self.classcheck(line)):
             pass
+        else:
+            comms = line.split()
+            if (len(comms) != 2):
+                print("** instance id missing **")
+            else:
+                key = f"{comms[0]}.{comms[1]}"
+                if key not in self.storage.all():
+                    print("** no instance found **")
+                else:
+                    print(self.storage.all()[key])
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
