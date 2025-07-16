@@ -4,6 +4,8 @@
 
 import cmd
 import sys
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -11,13 +13,33 @@ class HBNBCommand(cmd.Cmd):
     console.
     """
 
+    classes = ['BaseModel', 'FileStorage']
     prompt = '(hbnb) '
+    nexist= "** class doesn't exist **"
+    miss = "** class name missing **"
 
     def do_EOF(self, line):
         """ Exits the interorter gracefully
         """
 
         return True
+
+    @staticmethod
+    def classcheck(line):
+        """ A function to check that the given class exists
+        Args:
+             line: The class name to check and rint
+        Return:
+             True if the class exists and false otherwise
+        """
+
+        comms = line.split()
+        name = comms[0]
+        if name not in (HBNBCommand.classes):
+            print(HBNBCommand.nexist)
+            return False
+        else:
+            return True
 
     def do_quit(self, line):
         """Quits the interprter
@@ -47,11 +69,34 @@ class HBNBCommand(cmd.Cmd):
 
         pass
 
+    def help_quit():
+        """The help bar for the quit command
+        """
+        print("quits the interpreter")
+
     def do_create(self, line):
-        """ Create an object of a given class
+        """A command to create an object of a class specified by line
         """
 
-        pass
+        if not line:
+            print(self.miss)
+        else:
+            comms = line.split()
+            cla = comms[0]
+            if cla not in (self.classes):
+                print(self.nexist)
+            else:
+                obj = eval(cla)()
+                obj.save()
+
+    def do_show(self, line):
+        """ A function to show the string rep of an instance
+        """
+
+        if not line:
+            print(self.miss)
+        if (self.classcheck(line)):
+            pass
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
