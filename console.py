@@ -110,6 +110,18 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print(self.storage.all()[key])
 
+    def help_destroy(self):
+        """ documentation on how the destroy function works
+        """
+
+        print("The destroy function deletes an object from the program as well
+        as from the file.json storage
+        works like destroy [classname] [object id]
+        If the object exists it will be deleted.
+        If the class or obj is invalid it will say so and do nothing
+        "
+
+
     def do_destroy(self, line):
         """ A function to delete instances of an id and save the changes
         """
@@ -129,6 +141,13 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     del self.storage.all()[key]
                     self.storage.save()
+
+    def do_all(self, line):
+        """ prints all instances of a class
+        """
+
+        if not line:
+            pass
 
 
 if __name__ == "__main__":
