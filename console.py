@@ -110,6 +110,26 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print(self.storage.all()[key])
 
+    def do_destroy(self, line):
+        """ A function to delete instances of an id and save the changes
+        """
+
+        if not line:
+            print(self.miss)
+        if not (self.classcheck(line)):
+            pass
+        else:
+            comms = line.split()
+            if (len(comms) != 2):
+                print("**instance id missing **")
+            else:
+                key = f"{comms[0]}.{comms[1]}"
+                if key not in self.storage.all():
+                    print("** no instance found **")
+                else:
+                    del self.storage.all()[key]
+                    self.storage.save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
