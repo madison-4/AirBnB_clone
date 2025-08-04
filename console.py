@@ -89,7 +89,10 @@ class HBNBCommand(cmd.Cmd):
         """
 
         comms = line.split()
-        name = comms[0]
+        if comms:
+            name = comms[0]
+        else:
+            return False
         if name not in (HBNBCommand.classes):
             print(HBNBCommand.nexist)
             return False
@@ -138,11 +141,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             comms = line.split()
             cla = comms[0]
-            if cla not in (self.classes):
+            if cla not in CLASSES:
                 print(self.nexist)
             else:
                 obj = eval(cla)()
                 obj.save()
+                print(obj.id)
 
     def do_show(self, line):
         """ A function to show the string rep of an instance
