@@ -7,6 +7,7 @@ import cmd
 import sys
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from shlex import split
 
 
 class HBNBCommand(cmd.Cmd):
@@ -155,8 +156,16 @@ class HBNBCommand(cmd.Cmd):
         """ prints all instances of a class
         """
 
-        if not line:
-            pass
+        arg_list = split(line)
+        objects = self.storage.all().values()
+        if not arg_list:
+            print([str(obj) for obj in objects])
+        else:
+            if arg_list[0] not in self.classes:
+                print("** class doesn't exist **")
+            else:
+                print([str(obj) for obj in objects
+                       if arg_list[0] in str(obj)])
 
 
 if __name__ == "__main__":
