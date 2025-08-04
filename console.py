@@ -22,6 +22,7 @@ CLASSES = [
     "Review"
 ]
 
+
 def parse(arg):
     """ function to strip arguments and m,ake them able to strip functions
     It simply removes nonimportant xchars
@@ -62,6 +63,7 @@ def check_args(args):
     else:
         return arg_list
 
+
 class HBNBCommand(cmd.Cmd):
     """A commandline interpreter to test the AirBnB
     console.
@@ -69,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
 
     classes = ['BaseModel', 'FileStorage']
     prompt = '(hbnb) '
-    nexist= "** class doesn't exist **"
+    nexist = "** class doesn't exist **"
     miss = "** class name missing **"
     storage = models.storage
 
@@ -110,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
                 line = int(line)
                 if (type(line) is int):
                     sys.exit(line)
-            except:
+            except Exception as e:
                 return True
         return True
 
@@ -178,7 +180,6 @@ class HBNBCommand(cmd.Cmd):
         If the class or obj is invalid it will say so and do nothing\
         ")
 
-
     def do_destroy(self, line):
         """ A function to delete instances of an id and save the changes
         """
@@ -223,7 +224,6 @@ class HBNBCommand(cmd.Cmd):
                 print([str(obj) for obj in objects
                        if arg_list[0] in str(obj)])
 
-
     def help_update(self):
         """ update attributes in the object
         """
@@ -260,6 +260,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
 
             self.storage.save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
